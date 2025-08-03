@@ -65,6 +65,7 @@ UpNetic/
 │   ├── routes/             # auth.js, posts.js, connections.js, chats.js
 │   ├── sockets/            # Socket.IO handlers
 │   ├── server.js
+|   ├── .env
 ├── Frontend/
 │   ├── public/
 │   ├── src/
@@ -73,7 +74,8 @@ UpNetic/
 │   │   ├── store/
 │   │   └── App.jsx
 │   ├── vite.config.js
-├── .env
+|   ├── .env
+
 ```
 
 ---
