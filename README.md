@@ -4,35 +4,35 @@
 
 ---
 
-## 🔥 Features
+## Features
 
-### 👥 Authentication & Security
+### Authentication & Security
 
 - User registration & login (JWT-based)
 - Password hashing via bcrypt
 - Secure route protection with middleware
 
-### 🧵 Posts & Feed
+### Posts & Feed
 
 - Create, update, and delete posts
 - Like and comment system
 - Infinite scrolling for optimized feed loading
 - Tag support for post discoverability
 
-### 👤 Connections
+### Connections
 
 - Send & accept connection requests
 - View all connections
 - Mutual connections logic
 
-### 💬 Real-Time Messaging
+### Real-Time Messaging
 
 - WebSocket (Socket.IO)-based direct messaging
 - Real-time updates when users send/receive messages
 - Persistent chat history with MongoDB
 - Online/offline user status support
 
-### 🌐 Full-Stack Tech
+### Full-Stack Tech
 
 - RESTful APIs built with Express.js
 - MongoDB with Mongoose for data modeling
@@ -42,7 +42,7 @@
 
 ---
 
-## 🧱 Tech Stack
+## Tech Stack
 
 | Layer     | Technology                                |
 | --------- | ----------------------------------------- |
@@ -55,7 +55,7 @@
 
 ---
 
-## 🗂 Project Structure
+## Project Structure
 
 ```
 UpNetic/
@@ -78,7 +78,7 @@ UpNetic/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -121,7 +121,7 @@ npm run dev
 
 ---
 
-## 🔄 Infinite Scrolling (Frontend)
+## Infinite Scrolling (Frontend)
 
 Implemented using:
 
@@ -136,7 +136,7 @@ GET /api/posts?page=2&limit=10
 
 ---
 
-## 💬 Real-Time Messaging (Socket.IO)
+## Real-Time Messaging (Socket.IO)
 
 - Socket connection established at login
 - Messages sent/received instantly via Socket.IO
@@ -147,7 +147,7 @@ GET /api/posts?page=2&limit=10
 
 ---
 
-## 📑 API Endpoints (Sample)
+## API Endpoints (Sample)
 
 ### Auth
 
@@ -191,7 +191,7 @@ GET /api/posts?page=2&limit=10
 
 ---
 
-## 📦 Scripts
+## Scripts
 
 **Backend:**
 
@@ -210,7 +210,7 @@ npm run preview   # Preview production
 
 ---
 
-## 🔐 Security Features
+## Security Features
 
 - JWT token-based authentication
 - Passwords hashed using bcrypt
