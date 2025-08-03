@@ -61,8 +61,6 @@ const Feed = () => {
       }
     };
 
-   
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isFetching, hasMore]);
@@ -100,6 +98,9 @@ const Feed = () => {
                       </p>
                     </div>
                   )}
+                  <div className="flex justify-center items-center w-full">
+                    {isFetching && <ClipLoader color="#0077B5" size={30} />}
+                  </div>
                 </div>
               )}
             </div>

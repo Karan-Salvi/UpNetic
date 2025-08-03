@@ -4,6 +4,7 @@ import {
   useGetConnectionsQuery,
   useSendConnectionRequestMutation,
   useRespondToConnectionMutation,
+  useCreateOrGetChatMutation,
 } from "../store/api";
 import Header from "../components/Layout/Header";
 import {
@@ -12,7 +13,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Connections = () => {
   const [activeTab, setActiveTab] = useState("connections");
@@ -20,8 +21,20 @@ const Connections = () => {
   const { data: connectionsData, isLoading } = useGetConnectionsQuery();
   const [sendConnectionRequest] = useSendConnectionRequestMutation();
   const [respondToConnection] = useRespondToConnectionMutation();
+  const [createOrGetChat] = useCreateOrGetChatMutation();
 
+  const navigate = useNavigate();
 
+  const handleSendMessage = async (participantId) => {
+    try {
+      const chat = await createOrGetChat(participantId).unwrap();
+      console.log("Chat Data : ", chat);
+      navigate(`/chat`);
+    } catch (error) {
+      navigate(`/chat`);
+      console.log(error);
+    }
+  }; //
 
   const handleSendRequest = async (userId) => {
     try {
@@ -117,7 +130,12 @@ const Connections = () => {
                         {connection.headline}
                       </p>
                       <div className="flex space-x-2">
-                        <button className="flex-1 bg-white hover:bg-gray-50 text-blue-500 border border-linkedin-blue px-6 py-2 rounded-lg font-medium transition-all duration-200  cursor-pointer text-sm ">
+                        <button
+                          onClick={() => {
+                            handleSendMessage(connection.user._id);
+                          }}
+                          className="flex-1 bg-white hover:bg-gray-50 text-blue-500 border border-linkedin-blue px-6 py-2 rounded-lg font-medium transition-all duration-200  cursor-pointer text-sm "
+                        >
                           Message
                         </button>
                         <Link

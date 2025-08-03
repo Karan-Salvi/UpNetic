@@ -1,6 +1,8 @@
-import io from 'socket.io-client';
-import store from '../store';
-import { addMessage, setOnlineUsers } from '../store/slices/chatSlice';
+import io from "socket.io-client";
+import store from "../store";
+import { addMessage, setOnlineUsers } from "../store/slices/chatSlice";
+
+const baseURI = import.meta.env.VITE_API_URL;
 
 class SocketService {
   constructor() {
@@ -8,44 +10,45 @@ class SocketService {
   }
 
   connect(userId) {
-    this.socket = io('http://localhost:5000', {
+    this.socket = io(baseURI, {
       auth: {
-        userId,
+        // userId,
+        token: localStorage.getItem("token"),
       },
     });
 
-    this.socket.on('connect', () => {
-      console.log('Connected to server');
+    this.socket.on("connect", () => {
+      console.log("Connected to server");
     });
 
-    this.socket.on('message', (data) => {
+    this.socket.on("message", (data) => {
       store.dispatch(addMessage(data));
     });
 
-    this.socket.on('onlineUsers', (users) => {
+    this.socket.on("onlineUsers", (users) => {
       store.dispatch(setOnlineUsers(users));
     });
 
-    this.socket.on('disconnect', () => {
-      console.log('Disconnected from server');
+    this.socket.on("disconnect", () => {
+      console.log("Disconnected from server");
     });
   }
 
   sendMessage(chatId, message) {
     if (this.socket) {
-      this.socket.emit('sendMessage', { chatId, message });
+      this.socket.emit("sendMessage", { chatId, message });
     }
   }
 
   joinChat(chatId) {
     if (this.socket) {
-      this.socket.emit('joinChat', chatId);
+      this.socket.emit("joinChat", chatId);
     }
   }
 
   leaveChat(chatId) {
     if (this.socket) {
-      this.socket.emit('leaveChat', chatId);
+      this.socket.emit("leaveChat", chatId);
     }
   }
 

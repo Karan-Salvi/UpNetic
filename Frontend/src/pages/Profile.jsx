@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
+  useCreateOrGetChatMutation,
   useGetPostsQuery,
   useGetProfileQuery,
   useSendConnectionRequestMutation,
@@ -21,8 +22,16 @@ const Profile = () => {
   const { userId } = useParams();
   const { user: currentUser } = useSelector((state) => state.auth);
   const [sendConnectionRequest] = useSendConnectionRequestMutation();
+  const [createOrGetChat] = useCreateOrGetChatMutation();
 
-
+  const handleSendMessage = async (participantId) => {
+    try {
+      const chat = await createOrGetChat(participantId).unwrap();
+      navigate(`/chat/${chat._id}`);
+    } catch (error) {
+      toast.error("Failed to create chat");
+    }
+  }; //
 
   const {
     data: postData,
@@ -83,9 +92,8 @@ const Profile = () => {
 
   const handleConnect = async () => {
     try {
-    
       const data = await sendConnectionRequest(userId).unwrap();
- 
+
       toast.success("Connection request sent!");
     } catch (error) {
       toast.error("Failed to send request");
@@ -213,7 +221,9 @@ const Profile = () => {
                 ) : (
                   <>
                     <div className="flex gap-5">
-                      {!currentUser?.connections?.includes(userId.toString()) && (
+                      {!currentUser?.connections?.includes(
+                        userId.toString()
+                      ) && (
                         <div className="flex flex-col items-center justify-between group">
                           <button
                             onClick={handleConnect}

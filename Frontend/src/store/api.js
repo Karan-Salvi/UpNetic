@@ -6,6 +6,7 @@ const baseQuery = fetchBaseQuery({
   baseUrl: `${baseURI}/api`,
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
+
     if (token) {
       headers.set("authorization", `Bearer ${token}`);
     }
@@ -132,6 +133,74 @@ export const api = createApi({
       query: (chatId) => `/chats/${chatId}/messages`,
       providesTags: ["Chat"],
     }),
+
+    // 🟡 Get messages from a chat with pagination
+    getChatMessages: builder.query({
+      query: ({ chatId, page = 1, limit = 50 }) =>
+        `/${chatId}/messages?page=${page}&limit=${limit}`,
+      providesTags: (result, error, { chatId }) => [
+        { type: "Messages", id: chatId },
+      ],
+    }),
+
+    // 🟢 Create or get a direct chat
+    createOrGetChat: builder.mutation({
+      query: (participantId) => ({
+        url: `/chats`,
+        method: "POST",
+        body: { participantId },
+      }),
+      invalidatesTags: ["Chats"],
+    }),
+
+    // 🟢 Send a message
+    sendMessage: builder.mutation({
+      query: ({ chatId, content, messageType = "text" }) => ({
+        url: `/chats/${chatId}/messages`,
+        method: "POST",
+        body: { content, messageType },
+      }),
+      invalidatesTags: (result, error, { chatId }) => [
+        { type: "Messages", id: chatId },
+        { type: "Chats" },
+      ],
+    }),
+
+    // 🟡 Edit a message
+    editMessage: builder.mutation({
+      query: ({ chatId, messageId, content }) => ({
+        url: `/chats/${chatId}/messages/${messageId}`,
+        method: "PUT",
+        body: { content },
+      }),
+      invalidatesTags: (result, error, { chatId }) => [
+        { type: "Messages", id: chatId },
+      ],
+    }),
+
+    // 🔴 Delete a message
+    deleteMessage: builder.mutation({
+      query: ({ chatId, messageId }) => ({
+        url: `/chats/${chatId}/messages/${messageId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: (result, error, { chatId }) => [
+        { type: "Messages", id: chatId },
+      ],
+    }),
+
+    // 🟢 Mark messages as read
+    markAsRead: builder.mutation({
+      query: ({ chatId, messageIds }) => ({
+        url: `/chats/${chatId}/read`,
+        method: "PUT",
+        body: { messageIds },
+      }),
+      invalidatesTags: (result, error, { chatId }) => [
+        { type: "Messages", id: chatId },
+        { type: "Chats" },
+      ],
+    }),
   }),
 });
 
@@ -150,4 +219,10 @@ export const {
   useRespondToConnectionMutation,
   useGetChatsQuery,
   useGetChatMessagesQuery,
+
+  useCreateOrGetChatMutation,
+  useSendMessageMutation,
+  useEditMessageMutation,
+  useDeleteMessageMutation,
+  useMarkAsReadMutation,
 } = api;

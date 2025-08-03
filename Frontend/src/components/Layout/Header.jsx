@@ -37,7 +37,7 @@ const Header = () => {
               className="flex items-center justify-start space-x-1"
             >
               <img
-                src="/images/logo.jpg"
+                src="/images/logo.png"
                 className="h-6  w-auto"
                 alt="brand logo"
               />
@@ -150,7 +150,7 @@ const Header = () => {
         {/* Mobile Navigation Menu */}
         {isMenuOpen && (
           <div className="md:hidden py-3 border-t border-gray-200">
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-3 gap-4">
               <Link
                 to="/feed"
                 className="flex flex-col items-center p-2 text-gray-600 hover:text-blue-500 transition-colors"
@@ -186,11 +186,6 @@ const Header = () => {
                 )}
                 <span className="text-xs">Chat</span>
               </Link>
-
-              <button className="flex flex-col items-center p-2 text-gray-600 hover:text-blue-500 transition-colors cursor-pointer">
-                <BellIcon className="w-6 h-6 mb-1" />
-                <span className="text-xs">Notify</span>
-              </button>
             </div>
           </div>
         )}
