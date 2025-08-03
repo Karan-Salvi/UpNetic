@@ -32,11 +32,16 @@ const Header = () => {
         <div className="flex justify-between items-center py-3">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/feed" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-linkedin-blue rounded flex items-center justify-center">
-                <span className="text-white font-bold text-sm">in</span>
-              </div>
-              <span className="text-xl font-extrabold text-blue-500 hidden sm:block poppins">
+            <Link
+              to="/feed"
+              className="flex items-center justify-start space-x-1"
+            >
+              <img
+                src="/images/logo.jpg"
+                className="h-6  w-auto"
+                alt="brand logo"
+              />
+              <span className="text-2xl font-extrabold text-blue-500 hidden sm:block roboto">
                 UpNetic
               </span>
             </Link>
@@ -59,7 +64,7 @@ const Header = () => {
             {/* Mobile menu button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 rounded-md text-gray-600 hover:text-blue-500"
+              className="md:hidden p-2 rounded-md text-gray-600 hover:text-blue-500 cursor-pointer"
             >
               {isMenuOpen ? (
                 <XMarkIcon className="h-6 w-6" />
@@ -102,18 +107,13 @@ const Header = () => {
                 )}
                 <span className="text-xs">Chat</span>
               </Link>
-
-              <button className="flex flex-col items-center p-2 text-gray-600 hover:text-blue-500 transition-colors">
-                <BellIcon className="w-6 h-6 mb-1" />
-                <span className="text-xs">Notifications</span>
-              </button>
             </div>
 
             {/* Profile Menu */}
             <div className="relative cursor-pointer">
               <button
                 onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
-                className="flex items-center space-x-2 p-2 rounded-md hover:bg-gray-100 transition-colors cursor-pointer"
+                className="  flex items-center space-x-2 p-2 rounded-md hover:bg-gray-100 transition-colors cursor-pointer"
               >
                 <img
                   src={user?.avatar || "/images/profile.png"}
@@ -137,7 +137,7 @@ const Header = () => {
 
                   <button
                     onClick={handleLogout}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                   >
                     Sign Out
                   </button>
@@ -187,7 +187,7 @@ const Header = () => {
                 <span className="text-xs">Chat</span>
               </Link>
 
-              <button className="flex flex-col items-center p-2 text-gray-600 hover:text-blue-500 transition-colors">
+              <button className="flex flex-col items-center p-2 text-gray-600 hover:text-blue-500 transition-colors cursor-pointer">
                 <BellIcon className="w-6 h-6 mb-1" />
                 <span className="text-xs">Notify</span>
               </button>

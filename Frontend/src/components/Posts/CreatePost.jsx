@@ -41,7 +41,7 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="card p-4 mb-4  rounded-2xl shadow-md border border-gray-100">
+    <div className="card p-4 mb-4  rounded-2xl shadow-md border border-gray-100 bg-white">
       <form onSubmit={handleSubmit}>
         <div className="flex space-x-3">
           <img

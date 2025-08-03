@@ -121,7 +121,7 @@ const Chat = () => {
                       <button
                         key={chat._id}
                         onClick={() => handleChatSelect(chat)}
-                        className={`w-full p-4 text-left hover:bg-gray-50 transition-colors ${
+                        className={`w-full p-4 text-left hover:bg-gray-50 transition-colors cursor-pointer ${
                           isActive
                             ? "bg-linkedin-blue bg-opacity-10 border-r-2 border-linkedin-blue"
                             : ""
@@ -130,10 +130,7 @@ const Chat = () => {
                         <div className="flex items-center space-x-3">
                           <div className="relative">
                             <img
-                              src={
-                                otherUser.avatar ||
-                                "/images/profile.png"
-                              }
+                              src={otherUser.avatar || "/images/profile.png"}
                               alt={otherUser.name}
                               className="w-12 h-12 rounded-full object-cover"
                             />
@@ -273,7 +270,7 @@ const Chat = () => {
                     <button
                       type="submit"
                       disabled={!messageText.trim()}
-                      className="btn-primary p-2 rounded-full disabled:opacity-50"
+                      className="bg-linkedin-blue hover:bg-linkedin-blue-dark text-white px-6 py-2 font-medium transition-all duration-200 transform hover:scale-105  p-2 rounded-full disabled:opacity-50 cursor-pointer"
                     >
                       <PaperAirplaneIcon className="w-5 h-5" />
                     </button>

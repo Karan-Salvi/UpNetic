@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import {
   useGetPostsQuery,
   useGetProfileQuery,
+  useSendConnectionRequestMutation,
   useUpdateProfileMutation,
   useUploadAvatarMutation,
 } from "../store/api";
@@ -11,10 +12,17 @@ import Header from "../components/Layout/Header";
 import { PencilIcon, CameraIcon } from "@heroicons/react/24/outline";
 import toast from "react-hot-toast";
 import PostCard from "../components/Posts/PostCard";
+import { VscSaveAs } from "react-icons/vsc";
+import { MdOutlineCancel } from "react-icons/md";
+import { BsFillPeopleFill } from "react-icons/bs";
+import { TiMessages } from "react-icons/ti";
 
 const Profile = () => {
   const { userId } = useParams();
   const { user: currentUser } = useSelector((state) => state.auth);
+  const [sendConnectionRequest] = useSendConnectionRequestMutation();
+
+
 
   const {
     data: postData,
@@ -28,9 +36,6 @@ const Profile = () => {
     limit: 10,
   });
 
-  console.log("Post data is : ", postData);
-
-  console.log(currentUser);
   const { data: profileData, isLoading } = useGetProfileQuery(userId);
   const [updateProfile] = useUpdateProfileMutation();
   const [uploadAvatar] = useUploadAvatarMutation();
@@ -76,6 +81,17 @@ const Profile = () => {
     }
   };
 
+  const handleConnect = async () => {
+    try {
+    
+      const data = await sendConnectionRequest(userId).unwrap();
+ 
+      toast.success("Connection request sent!");
+    } catch (error) {
+      toast.error("Failed to send request");
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-linkedin-gray-light">
@@ -93,9 +109,9 @@ const Profile = () => {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* Profile Header */}
-        <div className="card mb-6 overflow-hidden">
+        <div className="card mb-6 overflow-hidden rounded-t-2xl">
           {/* Cover Photo */}
-          <div className="h-48 bg-gradient-to-r from-linkedin-blue to-linkedin-blue-dark"></div>
+          <div className="h-48 bg-gradient-to-r from-blue-100 to-blue-500"></div>
 
           {/* Profile Info */}
           <div className="px-6 pb-6">
@@ -109,7 +125,7 @@ const Profile = () => {
                 />
                 {isOwnProfile && (
                   <label className="absolute bottom-2 right-2 bg-white rounded-full p-2 shadow-lg cursor-pointer hover:bg-gray-50">
-                    <CameraIcon className="w-5 h-5 text-gray-600" />
+                    <CameraIcon className="w-5 h-5 text-gray-700" />
                     <input
                       type="file"
                       accept="image/*"
@@ -123,7 +139,7 @@ const Profile = () => {
               {/* Basic Info */}
               <div className="flex-1">
                 {isEditing ? (
-                  <div className="space-y-3">
+                  <div className="space-y-3 ">
                     <input
                       type="text"
                       value={editData.name}
@@ -173,29 +189,53 @@ const Profile = () => {
                 {isOwnProfile ? (
                   isEditing ? (
                     <>
-                      <button onClick={handleSave} className="btn-primary">
-                        Save
+                      <button
+                        onClick={handleSave}
+                        className="border border-blue-500 text-blue-500 p-2 inline-block justify-center items-center rounded-full fo transition-all duration-200 transform hover:scale-105  cursor-pointer font-extrabold"
+                      >
+                        <VscSaveAs className="text-lg" />
                       </button>
                       <button
                         onClick={() => setIsEditing(false)}
-                        className="btn-secondary"
+                        className="bg-white hover:bg-gray-50 text-red-500 text-4xl  rounded-full font-medium transition-all duration-200  cursor-pointer"
                       >
-                        Cancel
+                        <MdOutlineCancel />
                       </button>
                     </>
                   ) : (
                     <button
                       onClick={handleEdit}
-                      className="flex items-center space-x-2 btn-secondary"
+                      className="flex items-center space-x-2 bg-white hover:bg-gray-50 text-black border border-linkedin-blue p-2 rounded-full font-medium transition-all duration-200  cursor-pointer"
                     >
                       <PencilIcon className="w-4 h-4" />
-                      <span>Edit Profile</span>
                     </button>
                   )
                 ) : (
                   <>
-                    <button className="btn-primary">Connect</button>
-                    <button className="btn-secondary">Message</button>
+                    <div className="flex gap-5">
+                      {!currentUser?.connections?.includes(userId.toString()) && (
+                        <div className="flex flex-col items-center justify-between group">
+                          <button
+                            onClick={handleConnect}
+                            className="group-hover:scale-105 bg-blue-500 hover:bg-blue-600 text-white rounded-full p-3 font-medium transition-all duration-200 transform cursor-pointer"
+                          >
+                            <BsFillPeopleFill />
+                          </button>
+                          <span className="text-xs text-gray-500 font-semibold">
+                            Connect
+                          </span>
+                        </div>
+                      )}
+
+                      <div className="flex flex-col items-center justify-between group">
+                        <button className="group-hover:scale-105 border border-blue-500 hover:bg-blue-100 text-blue-600  rounded-full p-3 font-medium transition-all duration-200 transform cursor-pointer">
+                          <TiMessages />
+                        </button>
+                        <span className="text-xs text-gray-500 font-semibold">
+                          Message
+                        </span>
+                      </div>
+                    </div>
                   </>
                 )}
               </div>
@@ -204,7 +244,7 @@ const Profile = () => {
         </div>
 
         {/* About Section */}
-        <div className="card p-6 mb-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200 p-6 mb-6">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">About</h2>
           {isEditing ? (
             <textarea
@@ -224,7 +264,7 @@ const Profile = () => {
         </div>
 
         {/* Experience Section */}
-        <div className="card p-6 mb-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200 p-6 mb-6">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">
             Experience
           </h2>
@@ -250,7 +290,7 @@ const Profile = () => {
         </div>
 
         {/* Activity Section */}
-        <div className="card p-6">
+        <div className="card">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">
             Recent Activity
           </h2>

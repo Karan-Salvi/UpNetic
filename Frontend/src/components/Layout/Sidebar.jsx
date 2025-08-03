@@ -19,7 +19,7 @@ const Sidebar = () => {
     { name: "Messages", href: "/chat", icon: ChatBubbleLeftIcon },
   ];
 
-  console.log("Sidebar user : ", user);
+ 
 
   const isActive = (href) => location.pathname === href;
 
@@ -83,15 +83,15 @@ const Sidebar = () => {
       <div className="mt-6 pt-4 border-t border-gray-200">
         <h4 className="text-sm font-semibold text-gray-900 mb-3">Recent</h4>
         <div className="space-y-2">
-          <button className="flex items-center space-x-2 text-sm text-gray-600 hover:text-gray-900 transition-colors">
+          <button className="flex items-center space-x-2 text-sm text-gray-600 hover:text-gray-900 transition-colors cursor-pointer">
             <div className="w-2 h-2 bg-green-500 rounded-full"></div>
             <span>React Developers</span>
           </button>
-          <button className="flex items-center space-x-2 text-sm text-gray-600 hover:text-gray-900 transition-colors">
+          <button className="flex items-center space-x-2 text-sm text-gray-600 hover:text-gray-900 transition-colors cursor-pointer">
             <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
             <span>JavaScript Community</span>
           </button>
-          <button className="flex items-center space-x-2 text-sm text-gray-600 hover:text-gray-900 transition-colors">
+          <button className="flex items-center space-x-2 text-sm text-gray-600 hover:text-gray-900 transition-colors cursor-pointer">
             <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
             <span>Tech Startups</span>
           </button>

@@ -51,7 +51,7 @@ const PostCard = ({ post }) => {
   };
 
   return (
-    <article className="card p-6 mb-4 animate-fade-in shadow-md rounded-lg border-2 border-gray-200 ">
+    <article className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200 p-6 mb-4 animate-fade-in ">
       {/* Post Header */}
       <div className="flex items-start justify-between mb-4">
         <Link to={`/profile/${post.author?._id}`} className="flex space-x-3">
@@ -73,7 +73,7 @@ const PostCard = ({ post }) => {
           </div>
         </Link>
 
-        <button className="p-2 rounded-full hover:bg-gray-100 transition-colors">
+        <button className="p-2 rounded-full hover:bg-gray-100 transition-colors cursor-pointer">
           <EllipsisHorizontalIcon className="w-5 h-5 text-gray-500" />
         </button>
       </div>
@@ -185,8 +185,12 @@ const PostCard = ({ post }) => {
                         addSuffix: true,
                       })}
                     </span>
-                    <button className="hover:text-gray-700">Like</button>
-                    <button className="hover:text-gray-700">Reply</button>
+                    <button className="hover:text-gray-700 cursor-pointer">
+                      Like
+                    </button>
+                    <button className="hover:text-gray-700 cursor-pointer">
+                      Reply
+                    </button>
                   </div>
                 </div>
               </div>

@@ -25,7 +25,7 @@ const PostFilter = () => {
             <button
               key={filter.key}
               onClick={() => dispatch(setFilter(filter.key))}
-              className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+              className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 ${
                 isActive
                   ? "bg-linkedin-blue text-black shadow-md"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"

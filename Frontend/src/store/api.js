@@ -120,7 +120,7 @@ export const api = createApi({
         method: "PUT",
         body: { action },
       }),
-      invalidatesTags: ["Connection"],
+      invalidatesTags: ["Connection", "User"],
     }),
 
     // Chat endpoints

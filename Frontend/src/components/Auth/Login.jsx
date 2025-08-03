@@ -46,7 +46,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-400 to-linkedin-blue-900 flex items-center justify-center px-4 py-12 roboto">
+    <div className="min-h-screen bg-gradient-to-br from-blue-600 to-blue-100 flex items-center justify-center px-4 py-12 roboto">
       <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-4">
         {/* Logo */}
         {/* <div className="text-center pb-4 border-gray-200">
@@ -106,7 +106,7 @@ const Login = () => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-400 hover:text-gray-600"
                 >
                   {showPassword ? (
                     <EyeSlashIcon className="w-5 h-5" />
