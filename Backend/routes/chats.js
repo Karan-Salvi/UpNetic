@@ -69,7 +69,8 @@ router.get('/:chatId', asyncHandler(async (req, res) => {
 // @access  Private
 router.get('/:chatId/messages', asyncHandler(async (req, res) => {
   const { chatId } = req.params;
-  const { page = 1, limit = 50 } = req.query;
+  console.log("chatId is : ", chatId);
+  const { page = 1, limit = 100 } = req.query;
   const userId = req.user._id;
 
   const chat = await Chat.findById(chatId);

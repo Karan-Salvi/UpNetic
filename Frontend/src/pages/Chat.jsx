@@ -27,9 +27,11 @@ const Chat = () => {
 
   const { data: chatsData, isLoading: chatsLoading } = useGetChatsQuery();
   const { data: messagesData, isLoading: messagesLoading } =
-    useGetChatMessagesQuery(activeChat?._id, { skip: !activeChat });
+    useGetChatMessagesQuery(activeChat?._id, {
+      skip: !activeChat?._id, // Prevents undefined error
+    });
 
-  console.log("messagesData is : ", chatsData);
+  console.log("messagesData is : ", messagesData);
 
   useEffect(() => {
     if (user?._id) {
@@ -59,6 +61,8 @@ const Chat = () => {
     dispatch(setActiveChat(chat));
   };
 
+  console.log("Handler send message is : ", activeChat?.lastMessage?.sender);
+
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (!messageText.trim() || !activeChat) return;
@@ -69,8 +73,15 @@ const Chat = () => {
       timestamp: new Date(),
     };
 
+    // socketService.sendMessage(activeChat._id, message);
+    // if (activeChat?.lastMessage?.sender !== user._id) {
+    //   dispatch(addMessage({ chatId: activeChat._id, message }));
+    // }
+
     socketService.sendMessage(activeChat._id, message);
+
     dispatch(addMessage({ chatId: activeChat._id, message }));
+
     setMessageText("");
   };
 
@@ -227,7 +238,8 @@ const Chat = () => {
                         []
                       ).map((message, index) => {
                         const isOwn = message.sender === user._id;
-
+                        console.log("message is : ", message);
+                        console.log("isOwn is : ", isOwn);
                         return (
                           <div
                             key={index}
@@ -238,7 +250,7 @@ const Chat = () => {
                             <div
                               className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
                                 isOwn
-                                  ? "bg-linkedin-blue text-white"
+                                  ? "bg-blue-500 text-white"
                                   : "bg-gray-200 text-gray-900"
                               }`}
                             >

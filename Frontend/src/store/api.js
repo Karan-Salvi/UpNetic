@@ -134,14 +134,14 @@ export const api = createApi({
       providesTags: ["Chat"],
     }),
 
-    // 🟡 Get messages from a chat with pagination
-    getChatMessages: builder.query({
-      query: ({ chatId, page = 1, limit = 50 }) =>
-        `/${chatId}/messages?page=${page}&limit=${limit}`,
-      providesTags: (result, error, { chatId }) => [
-        { type: "Messages", id: chatId },
-      ],
-    }),
+    // // 🟡 Get messages from a chat with pagination
+    // getChatMessages: builder.query({
+    //   query: ({ chatId, page = 1, limit = 50 }) =>
+    //     `/${chatId}/messages?page=${page}&limit=${limit}`,
+    //   providesTags: (result, error, { chatId }) => [
+    //     { type: "Messages", id: chatId },
+    //   ],
+    // }),
 
     // 🟢 Create or get a direct chat
     createOrGetChat: builder.mutation({

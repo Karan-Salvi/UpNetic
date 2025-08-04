@@ -124,10 +124,10 @@ const Connections = () => {
                         className="w-20 h-20 rounded-full mx-auto mb-3 object-cover"
                       />
                       <h3 className="font-semibold text-gray-900">
-                        {connection.name}
+                        {connection.user.name}
                       </h3>
                       <p className="text-sm text-gray-600 mb-3">
-                        {connection.headline}
+                        {connection.user.headline}
                       </p>
                       <div className="flex space-x-2">
                         <button

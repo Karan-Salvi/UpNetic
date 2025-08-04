@@ -22,6 +22,12 @@ class SocketService {
     });
 
     this.socket.on("message", (data) => {
+      const state = store.getState();
+      const currentUserId = state.auth.user?._id;
+
+      // Skip if this message was sent by the current user
+      if (data.message?.sender?._id === currentUserId) return;
+
       store.dispatch(addMessage(data));
     });
 
