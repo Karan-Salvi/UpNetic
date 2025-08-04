@@ -8,6 +8,10 @@
 
 [Click here to view the live site](https://upnetic.vercel.app)
 
+### Note: 
+The initial request may take some time because if there hasn't been any activity for a while, the Render backend goes to sleep. When a new request comes in, Render takes time to wake up and activate the backend.
+
+
 ## Demo Video
 
 [Click here to Demo Video](https://drive.google.com/file/d/11RyKX1EK84ue6yFEF0Gu82SZ2EbJhI7Q/view?usp=sharing)

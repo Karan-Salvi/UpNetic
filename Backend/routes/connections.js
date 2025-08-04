@@ -99,8 +99,7 @@ router.post(
         message: "User ID is required",
       });
     }
-    console.log("userId is : ", userId);
-    console.log("requesterId is : ", requesterId);
+    
 
     if (userId === requesterId.toString()) {
       return res.status(400).json({

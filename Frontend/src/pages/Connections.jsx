@@ -28,11 +28,10 @@ const Connections = () => {
   const handleSendMessage = async (participantId) => {
     try {
       const chat = await createOrGetChat(participantId).unwrap();
-      console.log("Chat Data : ", chat);
+
       navigate(`/chat`);
     } catch (error) {
       navigate(`/chat`);
-      console.log(error);
     }
   }; //
 

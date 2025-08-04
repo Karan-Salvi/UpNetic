@@ -54,7 +54,7 @@ router.get(
 
     const total = await Post.countDocuments(query);
 
-    console.log("total", total);
+    
 
     res.json({
       success: true,

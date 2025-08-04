@@ -21,9 +21,7 @@ const Chat = () => {
     (state) => state.chat
   );
 
-  console.log("activeChat is : ", activeChat);
-  console.log("messages is : ", messages);
-  console.log("onlineUsers is : ", onlineUsers);
+  
 
   const { data: chatsData, isLoading: chatsLoading } = useGetChatsQuery();
   const { data: messagesData, isLoading: messagesLoading } =
@@ -31,7 +29,7 @@ const Chat = () => {
       skip: !activeChat?._id, // Prevents undefined error
     });
 
-  console.log("messagesData is : ", messagesData);
+  
 
   useEffect(() => {
     if (user?._id) {
@@ -61,7 +59,7 @@ const Chat = () => {
     dispatch(setActiveChat(chat));
   };
 
-  console.log("Handler send message is : ", activeChat?.lastMessage?.sender);
+ 
 
   const handleSendMessage = (e) => {
     e.preventDefault();
@@ -99,7 +97,7 @@ const Chat = () => {
       return otherUser.name.toLowerCase().includes(searchQuery.toLowerCase());
     }) || [];
 
-  console.log("filteredChats is : ", filteredChats);
+  
 
   return (
     <div className="min-h-screen bg-linkedin-gray-light">
@@ -238,8 +236,7 @@ const Chat = () => {
                         []
                       ).map((message, index) => {
                         const isOwn = message.sender === user._id;
-                        console.log("message is : ", message);
-                        console.log("isOwn is : ", isOwn);
+                       
                         return (
                           <div
                             key={index}
