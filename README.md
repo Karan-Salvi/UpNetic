@@ -4,6 +4,23 @@
 
 ---
 
+## Live Site
+
+[Click here to view the live site](https://upnetic.vercel.app)
+
+## Demo Video
+
+[Click here to Demo Video](https://drive.google.com/file/d/1pDAyfsFr2WVTnbWccYLjwQJmEqefpP_I/view?usp=sharing)
+
+## Demo Images
+
+<img src="./Frontend/public/images/u1.png" /><br>
+<img src="./Frontend/public/images/u2.png" /><br>
+<img src="./Frontend/public/images/u3.png" /><br>
+<img src="./Frontend/public/images/u4.png" /><br>
+<img src="./Frontend/public/images/u5.png" /><br>
+<img src="./Frontend/public/images/u6.png" /><br>
+
 ## Features
 
 ### Authentication & Security
