@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
   useCreateOrGetChatMutation,
@@ -24,14 +24,7 @@ const Profile = () => {
   const [sendConnectionRequest] = useSendConnectionRequestMutation();
   const [createOrGetChat] = useCreateOrGetChatMutation();
 
-  const handleSendMessage = async (participantId) => {
-    try {
-      const chat = await createOrGetChat(participantId).unwrap();
-      navigate(`/chat/${chat._id}`);
-    } catch (error) {
-      toast.error("Failed to create chat");
-    }
-  }; //
+  const navigate = useNavigate();
 
   const {
     data: postData,
@@ -100,6 +93,14 @@ const Profile = () => {
     }
   };
 
+  const handleSendMessage = async () => {
+    try {
+      const chat = await createOrGetChat(userId).unwrap();
+      navigate(`/chat`);
+    } catch (error) {
+      navigate(`/chat`);
+    }
+  }; //
   if (isLoading) {
     return (
       <div className="min-h-screen bg-linkedin-gray-light">
@@ -238,7 +239,10 @@ const Profile = () => {
                       )}
 
                       <div className="flex flex-col items-center justify-between group">
-                        <button className="group-hover:scale-105 border border-blue-500 hover:bg-blue-100 text-blue-600  rounded-full p-3 font-medium transition-all duration-200 transform cursor-pointer">
+                        <button
+                          onClick={handleSendMessage}
+                          className="group-hover:scale-105 border border-blue-500 hover:bg-blue-100 text-blue-600  rounded-full p-3 font-medium transition-all duration-200 transform cursor-pointer"
+                        >
                           <TiMessages />
                         </button>
                         <span className="text-xs text-gray-500 font-semibold">
