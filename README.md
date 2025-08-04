@@ -1,6 +1,6 @@
 # UpNetic – A Professional Community Platform
 
-**UpNetic** is a full-stack professional community platform like LinkedIn where users can connect, post updates, chat in real time, and grow their network. It supports infinite scrolling feeds and live messaging via WebSockets.
+**UpNetic** is a full-stack professional community platform where users can connect, post updates, chat in real time, and grow their network. It supports infinite scrolling feeds and live messaging via WebSockets.
 
 ---
 
@@ -10,7 +10,7 @@
 
 ## Demo Video
 
-[Click here to Demo Video](https://drive.google.com/file/d/1pDAyfsFr2WVTnbWccYLjwQJmEqefpP_I/view?usp=sharing)
+[Click here to Demo Video](https://drive.google.com/file/d/11RyKX1EK84ue6yFEF0Gu82SZ2EbJhI7Q/view?usp=sharing)
 
 ## Demo Images
 
